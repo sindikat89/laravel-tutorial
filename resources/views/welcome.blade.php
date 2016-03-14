@@ -64,7 +64,6 @@
 
     <div class="container">
         {!! Form::open(array(
-            'route'=>'create-admin',
             'method'=>'POST',
             'class'=>'form-signin')) !!}
             <h2 class="form-signin-heading">Create Admin</h2>
