@@ -11,6 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Get index view (GET)
+Route::get('/', array(
+        'as' => 'get-index',
+        'uses' => 'AdminController@getIndex',
+));
+
+// Create admin (POST)
+Route::post('create-admin', array(
+        'as' => 'create-admin',
+        'uses' => 'AdminController@postCreateAdmin',
+));

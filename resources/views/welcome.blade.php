@@ -64,17 +64,66 @@
 
     <div class="container">
         {!! Form::open(array(
+            'route'=>'create-admin',
             'method'=>'POST',
             'class'=>'form-signin')) !!}
             <h2 class="form-signin-heading">Create Admin</h2>
             <label for="inputName" class="sr-only">Name</label>
-            <input type="text" id="inputName" class="form-control" placeholder="Name" required autofocus>
+            <input name="name" type="text" id="inputName" class="form-control" placeholder="Name" required autofocus>
             <label for="inputEmail" class="sr-only">Email address</label>
-            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required>
+            <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required>
             <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
         {!!Form::close()!!}
+
+        <div class="row">
+          @if(Session::has('success'))
+            <div class="alert alert-success">
+              <strong>{{ Session::get('success') }}</strong>
+            </div>
+          @endif
+          @if(Session::has('error'))
+            <div class="alert alert-danger">
+              <strong>{{ Session::get('error') }}</strong>
+            </div>
+          @endif
+          
+        </div>
+
+
+         <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default panel-table">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col col-xs-6">
+                    <h3 class="panel-title">Admins Display</h3>
+                  </div>
+                </div>
+              </div>
+              <div class="panel-body">
+                <table class="table table-striped table-bordered table-list">
+                  <thead>
+                    <tr>
+                        <th class="hidden-xs">ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                    </tr> 
+                  </thead>
+                  <tbody>
+                    @foreach($admins as $admin)
+                      <tr>                        
+                        <td class="hidden-xs">{{$admin->id}}</td>
+                        <td>{{$admin->name}}</td>
+                        <td>{{$admin->email}}</td>                      
+                      </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+            
+              </div>
+            </div>
+      </div>
 
     </div> <!-- /container -->
 
