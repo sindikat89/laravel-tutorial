@@ -2,18 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use App\Repositories\AdminRepositoryInterface;
 
 class AdminController extends Controller
 {
+    public function __construct(
+        AdminRepositoryInterface $admin
+    ) {
+        $this->admin = $admin;
+    }
+
     public function getIndex()
     {
         // Fetch the data
-        $admins = Admin::all();
+        $admins = $this->admin->allAdmins();
 
         // Return the view with the admins collection
         return view('welcome', ['admins' => $admins]);
@@ -22,7 +28,7 @@ class AdminController extends Controller
     public function postCreateAdmin(Request $request)
     {
         // Save the data
-        $created = Admin::create($request->all());
+        $created = $this->admin->createAdmin($request->all());
 
         // Check if storing went through
         if ($created) {
