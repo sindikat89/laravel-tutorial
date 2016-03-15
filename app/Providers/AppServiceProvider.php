@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
+use App\Repositories\Admin\AdminRepository;
+use App\Repositories\Admin\AdminRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
-use App\Repositories\AdminRepository;
-use App\Repositories\AdminRepositoryInterface;
 
 class AppServiceProvider extends ServiceProvider
 {

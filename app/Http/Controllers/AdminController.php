@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
+use App\Repositories\Admin\AdminRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use App\Repositories\AdminRepositoryInterface;
 
 class AdminController extends Controller
 {
@@ -19,7 +19,7 @@ class AdminController extends Controller
     public function getIndex()
     {
         // Fetch the data
-        $admins = $this->admin->allAdmins();
+        $admins = $this->admin->all();
 
         // Return the view with the admins collection
         return view('welcome', ['admins' => $admins]);
@@ -28,7 +28,7 @@ class AdminController extends Controller
     public function postCreateAdmin(Request $request)
     {
         // Save the data
-        $created = $this->admin->createAdmin($request->all());
+        $created = $this->admin->create($request->all());
 
         // Check if storing went through
         if ($created) {
