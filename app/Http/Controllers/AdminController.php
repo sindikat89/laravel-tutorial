@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Repositories\Admin\AdminRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 class AdminController extends Controller
@@ -28,7 +30,7 @@ class AdminController extends Controller
     public function postCreateAdmin(Request $request)
     {
         // Save the data
-        $created = $this->admin->create($request->all());
+        $created = $this->admin->createAdmin($request->all());
 
         // Check if storing went through
         if ($created) {
@@ -38,5 +40,10 @@ class AdminController extends Controller
             // Else redirect with an error message
             return Redirect::route('get-index')->with('error', 'There was an error while saving the admin');
         }
+    }
+
+    public function adminLogin()
+    {
+        return view('login');
     }
 }
