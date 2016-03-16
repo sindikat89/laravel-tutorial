@@ -22,3 +22,45 @@ Route::post('create-admin', array(
         'as' => 'create-admin',
         'uses' => 'AdminController@postCreateAdmin',
 ));
+
+
+// Routes for administrators ADMIN
+Route::group(array('prefix' => 'cms'), function () {
+
+// =======================================================================//
+//  					UNAUTHENTICATED ROUTES (ADMIN)					  //
+// =======================================================================//
+
+    Route::group(array('before' => 'adminguest'), function () {
+
+        Route::get('/', array(
+            'as' => 'cms',
+            'uses' => 'AdminController@adminLogin',
+        ));
+
+        // Sign in (POST)
+        Route::post('admin-login-post', array(
+            'as' => 'admin-login-post',
+            'uses' => 'AdminController@postSignIn',
+        ));
+    });
+
+// =======================================================================//
+//  					AUTHENTICATED ROUTES (ADMIN)					  //
+// =======================================================================//
+
+    Route::group(array('before' => 'adminauth'), function () {
+
+        Route::get('dashboard', array(
+            'as' => 'admin-dashboard',
+            'uses' => 'AdminController@getDashboard',
+        ));
+
+        //GET route for 'admin logout'
+        Route::get('admin-logout', array(
+                'as' => 'admin-logout',
+                'uses' => 'AdminController@adminLogout',
+        ));
+
+    });
+});
