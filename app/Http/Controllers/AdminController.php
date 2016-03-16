@@ -46,4 +46,19 @@ class AdminController extends Controller
     {
         return view('login');
     }
+
+    public function postSignIn(Request $request)
+    {
+        // Attempt to login
+        $authAdmin = Auth::administrator()->attempt(array('email' => trim($request->get('email')), 'password' => trim($request->get('password'))));
+
+        if ($authAdmin) {
+            // If the administrator exists, redirect to dashboard
+            return Redirect::route('admin-dashboard');
+        } else {
+            // Else return error
+            return Redirect::back()->with('error', 'Wrong login details');
+        }
+    }
+
 }
