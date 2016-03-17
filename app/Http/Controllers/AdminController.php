@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
+use App\Http\Requests\CreateAdminRequest;
 use App\Repositories\Admin\AdminRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,7 +28,7 @@ class AdminController extends Controller
         return view('welcome', ['admins' => $admins]);
     }
 
-    public function postCreateAdmin(Request $request)
+    public function postCreateAdmin(CreateAdminRequest $request)
     {
         // Save the data
         $created = $this->admin->createAdmin($request->all());

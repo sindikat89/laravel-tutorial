@@ -31,7 +31,7 @@ Route::group(array('prefix' => 'cms'), function () {
 //  					UNAUTHENTICATED ROUTES (ADMIN)					  //
 // =======================================================================//
 
-    Route::group(array('before' => 'adminguest'), function () {
+    Route::group(array('middleware' => 'adminguest'), function () {
 
         Route::get('/', array(
             'as' => 'cms',
@@ -49,7 +49,7 @@ Route::group(array('prefix' => 'cms'), function () {
 //  					AUTHENTICATED ROUTES (ADMIN)					  //
 // =======================================================================//
 
-    Route::group(array('before' => 'adminauth'), function () {
+    Route::group(array('middleware' => 'adminauth'), function () {
 
         Route::get('dashboard', array(
             'as' => 'admin-dashboard',

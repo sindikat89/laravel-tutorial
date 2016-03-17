@@ -88,6 +88,13 @@
               <strong>{{ Session::get('error') }}</strong>
             </div>
           @endif
+          @if($errors->has())
+            @foreach($errors->all() as $message)
+              <div class="alert alert-danger">
+                <strong>{{ $message }}</strong>
+              </div>
+            @endforeach    
+          @endif
           
         </div>
 
