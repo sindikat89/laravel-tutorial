@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Admin;
+use App\Coin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Http\Requests\CreateAdminRequest;
@@ -14,9 +15,11 @@ use Illuminate\Support\Facades\Redirect;
 class AdminController extends Controller
 {
     public function __construct(
-        AdminRepositoryInterface $admin
+        AdminRepositoryInterface $admin,
+        Coin $coin
     ) {
         $this->admin = $admin;
+        $this->coin = $coin;
     }
 
     public function getIndex()
@@ -72,6 +75,21 @@ class AdminController extends Controller
         Auth::administrator()->logout();
 
         return Redirect::route('cms');
+    }
+
+    public function addCoin()
+    {
+        $admin = Auth::administrator()->get();
+        $coin = $admin->coin;
+        if (count($coin) == 0) {
+            $coin = $this->coin->create(['total' => 1, 'admin_id' => (int) $admin->id]);
+            $admin->save();
+        } else {
+            $coin->total = $coin->total + 1;
+            $coin->save();
+        }
+
+        return Redirect::back()->with('success', 'Gracias!');
     }
 
 }

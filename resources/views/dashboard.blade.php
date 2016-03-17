@@ -37,7 +37,15 @@
               <strong>Solo Uno Dashboardo!</strong>
             </div>
 
+            <a href="{!! URL::route('add-coin') !!}" class="btn btn-md btn-hover btn-warning">Mas Coinos por favor</a>
+
             <a href="{!! URL::route('admin-logout') !!}" class="btn btn-md btn-hover btn-danger">Logout</a>
+
+            @if(Session::has('success'))
+              <div class="alert alert-success">
+                <strong>{{ Session::get('success') }}</strong>
+              </div>
+            @endif
 
     </div> <!-- /container -->
 

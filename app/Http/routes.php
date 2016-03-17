@@ -62,5 +62,10 @@ Route::group(array('prefix' => 'cms'), function () {
                 'uses' => 'AdminController@adminLogout',
         ));
 
+        Route::get('add-coin', array(
+            'as' => 'add-coin',
+            'uses' => 'AdminController@addCoin',
+        ));
+
     });
 });

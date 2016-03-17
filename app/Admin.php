@@ -33,4 +33,9 @@ class Admin extends Model implements AuthenticatableContract,
                         'password',
                         'created_at',
                         'updated_at', );
+
+    public function coin()
+    {
+        return $this->hasOne('App\Coin');
+    }
 }
