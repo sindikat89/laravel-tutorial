@@ -66,4 +66,11 @@ class AdminController extends Controller
         return view('dashboard');
     }
 
+    public function adminLogout()
+    {
+        Auth::administrator()->logout();
+
+        return Redirect::route('cms');
+    }
+
 }

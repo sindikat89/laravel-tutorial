@@ -17,4 +17,16 @@ class AdminRepository extends AbstractRepository implements AdminRepositoryInter
     }
 
     protected $modelClassName = Admin::class;
+
+    public function createAdmin($input_data)
+    {
+        $data_array = array(
+            'email' => $input_data['email'],
+            'name' => $input_data['name'],
+            'password' => bcrypt($input_data['password']),
+        );
+
+        return $this->model->create($data_array);
+    }
 }
+
